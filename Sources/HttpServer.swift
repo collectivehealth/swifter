@@ -2,15 +2,14 @@
 //  HttpServer2.swift
 //  Swifter
 //
-//  Created by Damian Kolakowski on 17/12/15.
-//  Copyright © 2015 Damian Kołakowski. All rights reserved.
+//  Copyright (c) 2014-2016 Damian Kołakowski. All rights reserved.
 //
 
 import Foundation
 
 public class HttpServer: HttpServerIO {
     
-    public static let VERSION = "1.0.7"
+    public static let VERSION = "1.0.9"
     
     private let router = HttpRouter()
     
@@ -24,7 +23,7 @@ public class HttpServer: HttpServerIO {
     }
     
     public var DELETE, UPDATE, HEAD, POST, GET, PUT : MethodRoute;
-    
+
     public subscript(path: String) -> (HttpRequest -> HttpResponse)? {
         set {
             router.register(nil, path: path, handler: newValue)

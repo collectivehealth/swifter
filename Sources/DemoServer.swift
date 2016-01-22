@@ -1,7 +1,8 @@
 //
 //  DemoServer.swift
 //  Swifter
-//  Copyright (c) 2015 Damian Kołakowski. All rights reserved.
+//
+//  Copyright (c) 2014-2016 Damian Kołakowski. All rights reserved.
 //
 
 import Foundation
@@ -13,7 +14,7 @@ public func demoServer(publicDir: String?) -> HttpServer {
         server["/resources/:file"] = HttpHandlers.directory(publicDir)
     }
     
-    server["/files/:path"] = HttpHandlers.directoryBrowser("~/")
+    server["/files/:path"] = HttpHandlers.directoryBrowser("/")
 
     server["/"] = { r in
         var listPage = "Available services:<br><ul>"
@@ -109,6 +110,10 @@ public func demoServer(publicDir: String?) -> HttpServer {
                 w.write([UInt8]("[chunk \(i)]".utf8));
             }
         })
+    }
+    
+    server["/websocket"] = HttpHandlers.websocket() {
+        print("new message: \($0)")
     }
 
     return server

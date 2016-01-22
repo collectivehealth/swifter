@@ -1,7 +1,8 @@
 //
 //  HttpServer.swift
 //  Swifter
-//  Copyright (c) 2015 Damian Kołakowski. All rights reserved.
+//
+//  Copyright (c) 2014-2016 Damian Kołakowski. All rights reserved.
 //
 
 import Foundation
@@ -80,7 +81,11 @@ public class HttpServerIO {
     private struct InnerWriteContext: HttpResponseBodyWriter {
         let socket: Socket
         func write(data: [UInt8]) {
-            try? socket.writeUInt8(data)
+            do {
+                try socket.writeUInt8(data)
+            } catch {
+                print("\(error)")
+            }
         }
     }
     

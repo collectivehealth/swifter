@@ -1,7 +1,8 @@
 //
-//  String+Linux.swift
+//  String+Misc.swift
 //  Swifter
-//  Copyright (c) 2014 Damian Kołakowski. All rights reserved.
+//
+//  Copyright (c) 2014-2016 Damian Kołakowski. All rights reserved.
 //
 
 import Foundation
@@ -40,14 +41,7 @@ extension String {
     }
     
     public static func fromUInt8(array: [UInt8]) -> String {
-        #if os(Linux)
-            return String(data: NSData(bytes: array, length: array.count), encoding: NSUTF8StringEncoding)
-        #else
-            if let s = String(data: NSData(bytes: array, length: array.count), encoding: NSUTF8StringEncoding) {
-                return s
-            }
-            return ""
-        #endif
+        return String(data: NSData(bytes: array, length: array.count), encoding: NSUTF8StringEncoding) ?? ""
     }
     
     public func removePercentEncoding() -> String {

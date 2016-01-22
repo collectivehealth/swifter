@@ -1,7 +1,8 @@
 //
 //  HttpResponse.swift
 //  Swifter
-//  Copyright (c) 2015 Damian Kołakowski. All rights reserved.
+//
+//  Copyright (c) 2014-2016 Damian Kołakowski. All rights reserved.
 //
 
 import Foundation
@@ -63,6 +64,7 @@ public enum HttpResponseBody {
 
 public enum HttpResponse {
     
+    case SwitchProtocols
     case OK(HttpResponseBody), Created, Accepted
     case MovedPermanently(String)
     case BadRequest, Unauthorized, Forbidden, NotFound
@@ -71,6 +73,7 @@ public enum HttpResponse {
     
     func statusCode() -> Int {
         switch self {
+        case .SwitchProtocols         : return 101
         case .OK(_)                   : return 200
         case .Created                 : return 201
         case .Accepted                : return 202
@@ -86,6 +89,7 @@ public enum HttpResponse {
     
     func reasonPhrase() -> String {
         switch self {
+        case .SwitchProtocols          : return "Switching Protocols"
         case .OK(_)                    : return "OK"
         case .Created                  : return "Created"
         case .Accepted                 : return "Accepted"
