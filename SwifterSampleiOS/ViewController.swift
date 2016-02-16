@@ -13,9 +13,11 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let server = demoServer(NSBundle.mainBundle().resourcePath)
+        
+        let server = HttpServer();
+        
         do {
-            try server.start()
+            try server.start(9080)
         } catch {
             print("Server start error: \(error)")
         }

@@ -13,7 +13,7 @@
 
 /* Low level routines for POSIX sockets */
 
-enum SocketError: ErrorType {
+public enum SocketError: ErrorType {
     case SocketCreationFailed(String)
     case SocketSettingReUseAddrFailed(String)
     case BindFailed(String)
@@ -82,7 +82,7 @@ public class Socket: Hashable, Equatable {
     
     private let socketFileDescriptor: Int32
     
-    init(socketFileDescriptor: Int32) {
+    public init(socketFileDescriptor: Int32) {
         self.socketFileDescriptor = socketFileDescriptor
     }
     
@@ -108,10 +108,14 @@ public class Socket: Hashable, Equatable {
     }
     
     public func writeUTF8(string: String) throws {
-        try writeUInt8([UInt8](string.utf8))
+        try writeUInt8(ArraySlice(string.utf8))
     }
     
     public func writeUInt8(data: [UInt8]) throws {
+        try writeUInt8(ArraySlice(data))
+    }
+    
+    public func writeUInt8(data: ArraySlice<UInt8>) throws {
         try data.withUnsafeBufferPointer {
             var sent = 0
             while sent < data.count {

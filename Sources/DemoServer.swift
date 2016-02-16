@@ -8,6 +8,7 @@
 import Foundation
 
 public func demoServer(publicDir: String?) -> HttpServer {
+    
     let server = HttpServer()
     
     if let publicDir = publicDir {
@@ -104,6 +105,7 @@ public func demoServer(publicDir: String?) -> HttpServer {
     server["/wildcard/*/test/*/:param"] = { r in
         return .OK(.Html(r.path))
     }
+    
     server["/stream"] = { r in
         return HttpResponse.RAW(200, "OK", nil, { w in
             for i in 0...100 {
@@ -112,9 +114,11 @@ public func demoServer(publicDir: String?) -> HttpServer {
         })
     }
     
-    server["/websocket"] = HttpHandlers.websocket() {
-        print("new message: \($0)")
-    }
-
+    server["/websocket-echo"] = HttpHandlers.websocket({ (session, text) in
+        session.writeText(text)
+    }, { (session, binary) in
+        session.writeBinary(binary)
+    })
+    
     return server
 }

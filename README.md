@@ -6,6 +6,12 @@
 
 Tiny http server engine written in Swift ( https://developer.apple.com/swift/ ) programming language.
 
+![Platform](https://img.shields.io/badge/Platform-Linux%20&%20OSX-4BC51D.svg?style=flat)
+![Swift](https://img.shields.io/badge/Swift-2.2/3.0--dev-4BC51D.svg?style=flat)
+![Protocols](https://img.shields.io/badge/Protocols-HTTP%201.1%20&%20WebSockets-4BC51D.svg?style=flat)
+[![CocoaPods](https://img.shields.io/cocoapods/v/Swifter.svg?style=flat)]()
+[![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+
 ### How to start?
 ```swift
 let server = HttpServer()
@@ -29,11 +35,11 @@ server.start()
 ### CocoaPods? Yes.
 ```
 use_frameworks!
-pod 'Swifter', '~> 1.0.9'
+pod 'Swifter', '~> 1.1.2'
 ```
 
 ### Carthage? Also yes.
 
 ```
-github "glock45/swifter" == 1.0.9
+github "glock45/swifter" == 1.1.2
 ```
